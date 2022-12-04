@@ -1,0 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+.App {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .tasks {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.tasks__column {
+  margin: 0 1rem;
+  flex: 1;
+}
+.tasks__list {
+  display: flex;
+  flex-direction: column;
+  min-height: 110px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  background-color: #eee;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+.task__item {
+  border: 1px solid #ddd;
+  background-color: white;
+  padding: 0.5rem;
+  margin: 0.3rem 0;
+}
