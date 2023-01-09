@@ -1,4 +1,5 @@
 import CreationPartieForm from "../components/CreationPartieForm";
+import ListeParties from "../components/ListeParties";
 
 const Home = () => {
   return (
@@ -8,14 +9,12 @@ const Home = () => {
         <div className="flex space-x-20 flex-row justify-center ">
           <a
             href="tthp://127.0.0.1:3001/add"
-            class="button"
             className="p-5 rounded-full bg-indigo-500 border-4 border-indigo-500/100"
           >
             Créer partie
           </a>
           <a
             href="http://127.0.0.1:3001/test"
-            class="button"
             className="p-5 rounded-full bg-indigo-500 border-4 border-indigo-500/100"
           >
             Rejoindre partie
@@ -23,6 +22,7 @@ const Home = () => {
         </div>
       </form>
       <CreationPartieForm />
+      <ListeParties />
     </div>
   );
 };
