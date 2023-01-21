@@ -1,15 +1,13 @@
 export const controller = {};
 
 controller.add = (req, res) => {
-  const data = req.body;
-  console.log(req.body);
+  const {nom, users, sprints}= req.body;
   req.getConnection((err, connection) => {
     const query = connection.query(
-      "INSERT INTO partie (nom) VALUE (?)",
-      data.nom,
+      "INSERT INTO partie(nom, users, sprints) VALUES (?,?,?)",
+      [nom, users, sprints],
       (err, partie) => {
-        console.log(partie);
-        res.redirect("http://127.0.0.1:5173/");
+        res.redirect("http://localhost:5173/");
       }
     );
   });
@@ -18,8 +16,32 @@ controller.add = (req, res) => {
 controller.listPartiesUser = (req, res) => {
   req.getConnection((err, conn) => {
     conn.query("SELECT * FROM partie", (err, customer) => {
+			if (err) {
+				res.json(err);
+			}
       console.log(customer);
       res.json(customer);
     });
   });
 };
+controller.partiesPerId = (req, res) => {
+  const {id} = req.params;
+	console.log(req.params);
+  console.log(req.body);
+  req.getConnection((err, connection) => {
+    const query = connection.query(
+      "SELECT * FROM partie WHERE id = ?",
+      id,
+      (err, partie) => {
+				if(err){
+					res.json(err);
+				}
+        console.log(partie);
+				res.json(partie);
+        // res.redirect("http://localhost:5173/");
+      }
+    );
+  });
+};
+
+

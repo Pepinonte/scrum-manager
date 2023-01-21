@@ -7,12 +7,15 @@ import path from "path";
 import { PORT } from "./config.js";
 import cors from "cors";
 import { router as customerRoutes } from "./routes/customer.js";
+// import bodyParser from "body-parser";
 
 const app = express();
 
 const server = http.createServer(app);
 
 // Middlewares
+// app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("dev"));
 app.use(
