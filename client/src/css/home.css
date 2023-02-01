@@ -1,0 +1,36 @@
+body {
+  background-color: #f1f1f1;
+}
+
+.DivPrincipale {
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
+}
+
+.btn-crea-join {
+  display: block;
+}
+
+.Btn-creation {
+  margin-right: 20px;
+}
+
+.Btn-join {
+  margin-left: 20px;
+}
+
+.HomeText {
+  font-size: 50px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+
+.Logo {
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+
+  text-align: center;
+}

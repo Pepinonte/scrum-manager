@@ -1,0 +1,14 @@
+.Form {
+  padding-bottom: 30px;
+}
+
+.Form h1 {
+  font-size: 30px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+
+.Form Button {
+  padding: 15px;
+  margin-left: 10px;
+}

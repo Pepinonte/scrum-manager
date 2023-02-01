@@ -34,6 +34,9 @@ const JoinedPage = () => {
       >
         Ta rejoin la partie: {namePartieOwn.nom}
       </h1>
+      <a href="http://localhost:5173/">
+        <button>QUITTER</button>
+      </a>
     </div>
   );
 };
