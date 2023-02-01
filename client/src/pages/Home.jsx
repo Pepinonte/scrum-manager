@@ -9,9 +9,8 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Avatar } from "@mui/material";
 import LogoScrummy from "../img/logoScrummy.png";
-import { Avatar } from "@mui/material";
 
 const a = [];
 
@@ -19,67 +18,69 @@ const initalUrlListUserParties = "http://127.0.0.1:3001/listPartiesUser";
 
 const Home = () => {
 	const [formUser, setFormUser] = useState("");
-  const [parties, setParties] = useState([]);
-  const [flag, setFlag] = useState(false);
+	const [parties, setParties] = useState([]);
+	const [flag, setFlag] = useState(false);
 
 	const usersParser = (usersList) => {
 		return usersList.split(":-:");
-	}
+	};
 
 	const idFinderMatcherFromNameUser = (myUser) => {
 		let users = [];
-		let idPartie = [];
+		const idPartie = [];
 		parties.map((partie, index) => {
-			users += (usersParser(partie.users));
+			users += usersParser(partie.users);
 			if (users !== "") {
-				usersParser(partie.users).map(d => {
+				usersParser(partie.users).map((d) => {
 					if (d === myUser) {
 						idPartie.push(partie.id);
 					}
-				})	
+				});
 			}
 		});
 
 		return idPartie;
-	}
+	};
 
-  const fetchItemsListUserParties = (url) => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setParties(data);
-      })
-  };
+	const fetchItemsListUserParties = (url) => {
+		fetch(url)
+			.then((response) => response.json())
+			.then((data) => {
+				setParties(data);
+			});
+	};
 
-  useEffect(() => {
-    fetchItemsListUserParties(initalUrlListUserParties);
-  }, []);
+	useEffect(() => {
+		fetchItemsListUserParties(initalUrlListUserParties);
+	}, []);
 
-  useEffect(() => {
+	useEffect(() => {
 		const tempId = idFinderMatcherFromNameUser(formUser);
 		if (tempId.length > 0) {
-			setFlag(true)
+			setFlag(true);
 		}
 		a.push(tempId);
-  }, [formUser]);
+	}, [formUser]);
 
-  return (
+	return (
 		<div>
-			<div className={!flag ? "init" : "invisible" }>
+			<div className={!flag ? "init" : "invisible"}>
 				<form
-					onSubmit={ev => {
+					onSubmit={(ev) => {
 						ev.preventDefault();
 						setFormUser(ev.target.nom.value);
-						}}
-				>	
-						<input type="text" name="nom" placeholder="Quel votre nom d'utilisateur" />
+					}}
+				>
+					<input
+						type="text"
+						name="nom"
+						placeholder="Quel votre nom d'utilisateur"
+					/>
 
-					<button type="submit">
-						Charger vos parties
-					</button>
+					<button type="submit">Charger vos parties</button>
 				</form>
 			</div>
-			<div className={flag? "DivPrincipale" : "invisible" }>
+			<div className={flag ? "DivPrincipale" : "invisible"}>
 				<Avatar class="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
 				{/* <h1 className="HomeText">Scrummy</h1> */}
 				<form>
@@ -93,10 +94,10 @@ const Home = () => {
 					</div>
 				</form>
 				<CreationPartieForm />
-				<ListeParties id={a}/>
+				<ListeParties id={a} />
 			</div>
 		</div>
-  );
+	);
 };
 
 export default Home;
