@@ -3,18 +3,18 @@ import { Schema, model } from "mongoose";
 const partieSchema = Schema(
 	{
 		nom: { type: String, required: true, trim: true, unique: true },
-		// users: {
-		// type: Array,
-		// default: [],
-		// },
-		// sprints: {
-		// 	type: Array,
-		// 	default: [],
-		// },
-		// stories: {
-		// 	type: Array,
-		// 	default: [],
-		// },
+		users: {
+			type: Array,
+			default: [""],
+		},
+		sprints: {
+			type: Array,
+			default: [""],
+		},
+		stories: {
+			type: Array,
+			default: [""],
+		},
 	},
 	{
 		// timestamps: true,

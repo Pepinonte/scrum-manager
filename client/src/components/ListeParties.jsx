@@ -32,7 +32,15 @@ const ListeParties = (props) => {
       <ul>
         {/* if have problem with map methode dont forget add ? befor .map */}
         {parties?.map((q, key) => (
-          <li key={key}>Partie: {q.nom}</li>
+          <li key={key}>
+            Partie: {q.nom}
+            <a href={`http://localhost:5173/joinedPage/${q._id}`}>
+              <button>Rejoindre</button>
+            </a>
+            <a href={`http://127.0.0.1:3001/delete/${q._id}`}>
+              <button>Supprimer</button>
+            </a>
+          </li>
         ))}
       </ul>
     </div>
