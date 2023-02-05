@@ -6,3 +6,4 @@ router.post("/add", controller.add);
 // router.post("/partiesPerId", controller.partiesPerId);
 router.get("/partiesPerId/:id", controller.partiesPerId);
 router.get("/listPartiesUser", controller.listPartiesUser);
+router.post("/dellGame", controller.dellGame);

@@ -10,7 +10,6 @@ const CreationPartieForm = () => {
           name="users"
           placeholder="liste utilisatuers separe avec :-:"
         />
-        <input type="text" name="sprints" placeholder="sprints" />
         <button variant="contained" color="success" type="submit">
           Créer
         </button>

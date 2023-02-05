@@ -7,8 +7,8 @@ const JoinedPage = () => {
   const { partieId } = useParams();
   const [parties, setParties] = useState([]);
   const [namePartieOwn, setNamePartieOwn] = useState([]);
+  const [sprints, setSprints] = useState([]);
   const [flag, setFlag] = useState(false);
-  const [test, setTest] = useState("");
   const fetchItemsListUserParties = (url) => {
     fetch(url)
       .then((response) => response.json())
@@ -23,17 +23,21 @@ const JoinedPage = () => {
     fetchItemsListUserParties(initalUrlListUserParties);
   }, []);
 
+  useEffect(() => {
+    setSprints([usersParser(namePartieOwn.sprints)]);
+    console.log(sprints[0]);
+  }, [namePartieOwn]);
+
+  const usersParser = (dataList) => {
+    if (typeof dataList === "string") return dataList.split(":-:");
+  };
+
   return (
     <div>
-      {/* <button className={flag ? "hidden" : ""} onClick={() => setFlag(true)}>
-        ACCEDER
-      </button> */}
-      <h1
-        // className={flag ? "" : "hidden"}
-        onClick={() => console.log(namePartieOwn.nom)}
-      >
-        Ta rejoin la partie: {namePartieOwn.nom}
-      </h1>
+      <h1>Ta rejoin la partie: {namePartieOwn.nom}</h1>
+      {/* <h1>Les sprints sont: {namePartieOwn.sprints}</h1> */}
+      {/* Les sprints sont: <ul>{sprints.map((q) => q.map((o) => o))}</ul> */}
+      <h1>Les stories sont: {namePartieOwn.stories}</h1>
       <a href="http://localhost:5173/">
         <button>QUITTER</button>
       </a>

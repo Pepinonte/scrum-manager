@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 
 const ListeParties = (props) => {
   const [parties, setParties] = useState([]);
-  const [flag, setFlag] = useState(false);
   const [parties2, setParties2] = useState([]);
+  const [flag, setFlag] = useState(false);
   const [idss, setIdss] = useState([]);
 
   const MyIds = [];
@@ -49,16 +49,32 @@ const ListeParties = (props) => {
 
   const PartieCleanner = () => {
     let i = 0;
-    parties.map((a) =>
+    let t = 0;
+    let noOwnerIds = [];
+    parties.map((a) => {
       a.map((parts) => {
-        idss.map((b) => {
-          if (parts.id !== b) {
-            parties[0].splice(i, i);
-          }
-          i++;
-        });
-      })
-    );
+        idss.map((a) =>
+          a.map((q) => {
+            if (parts.id !== q) {
+              if (!noOwnerIds.includes(parts.id)) {
+                noOwnerIds.push(parts.id);
+              }
+              console.log("noOwnerIds: " + noOwnerIds);
+              if (noOwnerIds.includes(q) === true) {
+                console.log(
+                  "Myq: " + q + " " + noOwnerIds + " " + noOwnerIds.indexOf(q)
+                );
+                // noOwnerIds.splice(noOwnerIds.indexOf(q, 1));
+
+                // noOwnerIds.splice(q);
+              }
+              // parties[0].splice(i, i + 1);
+            }
+          })
+        );
+        i++;
+      });
+    });
   };
 
   const initalUrlListUserParties2 = "http://127.0.0.1:3001/partiesPerId/";
@@ -86,10 +102,13 @@ const ListeParties = (props) => {
   }, []);
 
   useEffect(() => {
-    PartieCleanner();
-    PartieCleanner();
     SetIds();
+    PartieCleanner();
+    fetchItemsListUserParties(initalUrlListUserParties1);
+    // PartieCleanner();
+
     console.log("flag est a " + flag);
+    console.log("idss: " + idss);
   }, [flag]);
 
   useEffect(() => {
@@ -106,7 +125,41 @@ const ListeParties = (props) => {
     <div>
       <button onClick={flagToggle}>Voir mes parties</button>
       <div className={!flag ? "invisible" : "ok"}>
-        <ul>{parties.map((e) => e.map((a) => <li>{a.nom}</li>))}</ul>
+        <ul>
+          {parties.map((e) =>
+            e.map((a) => (
+              <li>
+                {a.nom}{" "}
+                <a
+                  href={`http://localhost:5173/joinedPage/${a.id}`}
+                  className="Btn-join"
+                >
+                  <button variant="outlined">Rejoindre partie</button>
+                </a>
+                {/* <a
+                  href={`http://localhost:5173/dellGame/${a.id}`}
+                  className="Btn-join"
+                >
+                  <button variant="outlined">Supprimer partie</button>
+                </a> */}
+                <form action="http://localhost:3001/dellGame" method="post">
+                  <button onClick={flagToggle} className="btnSuppression">
+                    Supprimer
+                    <span>​</span>
+                  </button>
+
+                  <input
+                    className="idSupp invisible"
+                    name="idSupp"
+                    value={a.id}
+                  />
+                </form>
+              </li>
+            ))
+          )}
+        </ul>
+        {/* {idss.map((a) => a.map((q) => `</br> ${q}`))} */}
+        {/* {idss.map((a) => a.map((q) => console.log(`eeeeee ${q}`)))} */}
       </div>
     </div>
   );
