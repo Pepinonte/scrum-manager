@@ -1,44 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const ListeParties = () => {
-  const [parties, setParties] = useState([]);
-  const [partieOwn, setPartieOwn] = useState("");
+const ListeParties = (props) => {
+  const [parties, setParties] = useState();
 
-  const initalUrlListUserParties = "http://127.0.0.1:3001/listPartiesUser";
+  const initalUrlListUserParties = "http://127.0.0.1:3001/parties";
 
   const fetchItemsListUserParties = (url) => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setParties(data);
+        console.log(data);
+        // console.log(parties);
       })
-      .catch((err) => console.log("pppp" + err));
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
+    // PartieCleanner();
     fetchItemsListUserParties(initalUrlListUserParties);
+    console.log("la page a change");
   }, []);
 
-  const joinPartie = (id) => {
-    setPartieOwn(id);
-    console.log("partieOwn" + partieOwn);
-  };
+  // useEffect(() => {
+  //   console.log("parties a change");
+  // }, [parties]);
 
   return (
     <div>
-      <h1>Liste des parties</h1>
-      {parties.map((partie, index) => (
-        <div key={index}>
-          <h1>
-            {partie.id}-{partie.nom}
-          </h1>
-          {/* <button onClick={() => joinPartie(partie.id)}>rejoindre</button> */}
-          <NavLink to={`/joinedPage/${partie.id}`}>
-            <button>rejoindre</button>
-          </NavLink>
-        </div>
-      ))}
+      <ul>
+        {/* if have problem with map methode dont forget add ? befor .map */}
+        {parties?.map((q, key) => (
+          <li key={key}>
+            Partie: {q.nom}
+            <a href={`http://localhost:5173/joinedPage/${q._id}`}>
+              <button>Rejoindre</button>
+            </a>
+            <a href={`http://127.0.0.1:3001/delete/${q._id}`}>
+              <button>Supprimer</button>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

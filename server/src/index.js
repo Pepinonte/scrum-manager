@@ -1,38 +1,21 @@
 import express from "express";
-import http from "http";
+import indexRoutes from "./routes/index.routes";
+import "./database";
+import bodyParser from "body-parser";
 import morgan from "morgan";
-import mysql from "mysql2";
-import myConnecion from "express-myconnection";
-import path from "path";
-import { PORT } from "./config.js";
 import cors from "cors";
-import { router as customerRoutes } from "./routes/customer.js";
 
 const app = express();
 
-const server = http.createServer(app);
-
-// Middlewares
-app.use(cors());
+// middlewares
 app.use(morgan("dev"));
-app.use(
-  myConnecion(
-    mysql,
-    {
-      host: "localhost",
-      user: "root",
-      password: "root",
-      port: 3306,
-      database: "scrummy",
-    },
-    "single"
-  )
-);
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
-//routes
-app.use("/", customerRoutes);
-
-server.listen(PORT, () => {
-  console.log(`server on port ${PORT}`);
+// routes
+app.use(indexRoutes);
+// if have req.body undefined, change this line for app.use("/", indexRoutes) after import middleware (urlencoded) and import body-parser
+app.listen(3001, () => {
+	console.log(`server on port 3001`);
 });
