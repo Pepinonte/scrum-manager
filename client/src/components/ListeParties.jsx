@@ -80,7 +80,18 @@ const ListeParties = (props) => {
               <TableCell align="right"><a href={`http://localhost:5173/joinedPage/${q._id}`}>
               <button>Rejoindre</button>
               </a>
-              <Button onClick={handleOpen}>Open modal</Button>
+              </TableCell>
+              <TableCell align="right"><a href={`http://127.0.0.1:3001/delete/${q._id}`}>
+              <button>Supprimer</button>
+            </a></TableCell>
+              
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+    <Button onClick={handleOpen}>Open modal</Button>
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -96,16 +107,6 @@ const ListeParties = (props) => {
                   </Typography>
                 </Box>
               </Modal>
-              </TableCell>
-              <TableCell align="right"><a href={`http://127.0.0.1:3001/delete/${q._id}`}>
-              <button>Supprimer</button>
-            </a></TableCell>
-              
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
       {/* <ul>
         {/* if have problem with map methode dont forget add ? befor .map */}
         {/* {parties?.map((q, key) => (
