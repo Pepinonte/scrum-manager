@@ -33,9 +33,12 @@ const initalUrlListUserParties = "http://127.0.0.1:3001/listPartiesUser";
 
 const Home = () => {
   const [parties, setParties] = useState([]);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [openC, setOpenC] = React.useState(false);
+  const [openJ, setOpenJ] = React.useState(false);
+  const handleOpenC = () => setOpenC(true);
+  const handleCloseC = () => setOpenC(false);
+  const handleOpenJ = () => setOpenJ(true);
+  const handleCloseJ = () => setOpenJ(false);
 
   const idFinderMatcherFromNameUser = (myUser) => {
     let users = [];
@@ -72,10 +75,10 @@ const Home = () => {
         <Avatar class="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
         <ListeParties />
         <div className="ListPartie">
-          <Button onClick={handleOpen}>Créer partie</Button>
+          <Button onClick={handleOpenC}>Créer partie</Button>
           <Modal
-            open={open}
-            onClose={handleClose}
+            open={openC}
+            onClose={handleCloseC}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
@@ -83,10 +86,11 @@ const Home = () => {
               <CreationPartieForm />
             </Box>
           </Modal>
-          <Button onClick={handleOpen}>Rejoindre une partie</Button>
+
+          <Button onClick={handleOpenJ}>Rejoindre une partie</Button>
           <Modal
-            open={open}
-            onClose={handleClose}
+            open={openJ}
+            onClose={handleCloseJ}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >

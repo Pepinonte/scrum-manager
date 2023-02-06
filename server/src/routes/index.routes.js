@@ -17,9 +17,9 @@ router.post("/add", async (req, res) => {
 	});
 	console.log(partie);
 	const partieSaved = await partie.save();
-	// console.log(partieSaved);
+	console.log(partieSaved);
 
-	res.redirect("http://localhost:5173/");
+	res.redirect(`http://localhost:5173/joinedPage/${partieSaved._id}`);
 });
 
 router.get("/parties", async (req, res) => {
@@ -34,10 +34,11 @@ router.get("/parties/:id", async (req, res) => {
 
 router.post("/update/:id", async (req, res) => {
 	const { id } = req.params;
-	const { nom, user, sprint, storie, pseudo } = req.body;
+	const { nom, user, sprint, storie } = req.body;
+	console.log(req.body);
 	const parties = await Partie.findById(id);
 
-	console.log("eeee: " + parties.sprints[1]);
+	// console.log("eeee: " + parties.sprints[1]);
 	let myNewSprint = parties.sprints;
 	myNewSprint.push(sprint);
 
