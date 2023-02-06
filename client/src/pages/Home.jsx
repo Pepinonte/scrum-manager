@@ -9,16 +9,33 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Button, TextField, Avatar } from "@mui/material";
+import { Button, TextField, Avatar, Modal } from "@mui/material";
 import LogoScrummy from "../img/logoScrummy.png";
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import JoinPartieForm from "../components/JoinPartieForm";
 
 const a = [];
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const initalUrlListUserParties = "http://127.0.0.1:3001/listPartiesUser";
 
 const Home = () => {
   const [parties, setParties] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const idFinderMatcherFromNameUser = (myUser) => {
     let users = [];
@@ -49,20 +66,36 @@ const Home = () => {
     // fetchItemsListUserParties(initalUrlListUserParties);
   }, []);
 
-  //   const tempId = idFinderMatcherFromNameUser(formUser);
-  //   if (tempId.length > 0) {
-  //     setFlag(true);
-  //   }
-  //   a.push(tempId);
-  // }, [formUser]);
-
   return (
     <div>
-        <div className="DivPrincipale">
-            <Avatar class="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
-            <CreationPartieForm />
-            <ListeParties />
+      <div className="DivPrincipale">
+        <Avatar class="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
+        <ListeParties />
+        <div className="ListPartie">
+          <Button onClick={handleOpen}>Créer partie</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <CreationPartieForm />
+            </Box>
+          </Modal>
+          <Button onClick={handleOpen}>Rejoindre une partie</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <JoinPartieForm />
+            </Box>
+          </Modal>
         </div>
+      </div>
     </div>
   );
 };

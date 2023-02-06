@@ -10,10 +10,14 @@ router.get("/", (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-	const partie = Partie(req.body);
-	// console.log(partie);
+	const { nom, pseudo } = req.body;
+	const partie = Partie({
+		nom: nom,
+		users: [pseudo],
+	});
+	console.log(partie);
 	const partieSaved = await partie.save();
-	console.log(partieSaved);
+	// console.log(partieSaved);
 
 	res.redirect("http://localhost:5173/");
 });
@@ -30,7 +34,7 @@ router.get("/parties/:id", async (req, res) => {
 
 router.post("/update/:id", async (req, res) => {
 	const { id } = req.params;
-	const { nom, user, sprint, storie } = req.body;
+	const { nom, user, sprint, storie, pseudo } = req.body;
 	const parties = await Partie.findById(id);
 
 	console.log(req.body);
@@ -54,12 +58,107 @@ router.post("/update/:id", async (req, res) => {
 	};
 	console.log(myUpdate);
 	await Partie.findByIdAndUpdate(id, myUpdate);
-	res.redirect("http://localhost:5173/");
+	res.redirect(`http://localhost:5173/joinedPage/${id}`);
+});
+
+router.post("/join/:id", async (req, res) => {
+	const { id } = req.params;
+	const { nom, user, sprint, storie, pseudo } = req.body;
+	const parties = await Partie.findById(id);
+
+	console.log(req.body);
+
+	let myNewSprint = parties.sprints;
+	myNewSprint.push(sprint);
+
+	let myNewStories = parties.stories;
+	myNewStories.push(storie);
+
+	let myNewUsers = parties.users;
+	myNewUsers.push(user);
+
+	console.log(myNewStories);
+
+	const myUpdate = {
+		nom: nom,
+		users: pseudo,
+		sprints: myNewSprint,
+		stories: myNewStories,
+	};
+	console.log(myUpdate);
+	await Partie.findByIdAndUpdate(id, myUpdate);
+	res.redirect(`http://localhost:5173/joinedPage/${id}`);
 });
 
 router.get("/delete/:id", async (req, res) => {
 	const { id } = req.params;
 	await Partie.findByIdAndDelete(id, req.body);
+	res.redirect("http://localhost:5173/");
+});
+
+router.post("/deleteSprint/:rang/:id", async (req, res) => {
+	const { id, rang } = req.params;
+	const parties = await Partie.findById(id);
+	let myNewSprint = parties.sprints;
+	myNewSprint.splice(rang, 1);
+
+	const myUpdate = {
+		nom: parties.nom,
+		users: parties.users,
+		sprints: myNewSprint,
+		stories: parties.stories,
+	};
+	await Partie.findByIdAndUpdate(id, myUpdate);
+	res.redirect("http://localhost:5173/");
+});
+
+router.post("/updateSprint/:rang/:id", async (req, res) => {
+	const { id, rang } = req.params;
+	const parties = await Partie.findById(id);
+	let myNewSprint = parties.sprints;
+	myNewSprint.splice(rang, 1, req.body.sp);
+
+	const myUpdate = {
+		nom: parties.nom,
+		users: parties.users,
+		sprints: myNewSprint,
+		stories: parties.stories,
+	};
+	await Partie.findByIdAndUpdate(id, myUpdate);
+	res.redirect("http://localhost:5173/");
+});
+
+router.post("/deleteStories/:rang/:id", async (req, res) => {
+	const { id, rang } = req.params;
+	const parties = await Partie.findById(id);
+
+	let myNewStorie = parties.stories;
+	myNewStorie.splice(rang, 1);
+
+	const myUpdate = {
+		nom: parties.nom,
+		users: parties.users,
+		sprints: parties.sprints,
+		stories: myNewStorie,
+	};
+	await Partie.findByIdAndUpdate(id, myUpdate);
+	res.redirect("http://localhost:5173/");
+});
+
+router.post("/updateStories/:rang/:id", async (req, res) => {
+	const { id, rang } = req.params;
+	const parties = await Partie.findById(id);
+
+	let myNewStorie = parties.stories;
+	myNewStorie.splice(rang, 1, req.body.storie);
+
+	const myUpdate = {
+		nom: parties.nom,
+		users: parties.users,
+		sprints: parties.sprints,
+		stories: myNewStorie,
+	};
+	await Partie.findByIdAndUpdate(id, myUpdate);
 	res.redirect("http://localhost:5173/");
 });
 
