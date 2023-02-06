@@ -5,7 +5,7 @@ partie:
 - on peut rejoindre une partie : 3 ok
 - on peut quitter une partie : 1 ok
 - on affiche le nom d'utilisateur sur chaque page : 1
-- l'écran d'accueil de la partie s'affiche correctement : 1 ok
+- l'écran d'accueil de la partie s'affiche correctement : 1
   - on voit : nom du user, nom de la partie, code de la partie, numéro du jour (de 1 à l'infini)
 sprints
 - on peut lister les sprints : 3 ok

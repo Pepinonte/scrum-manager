@@ -87,7 +87,7 @@ const JoinedPage = () => {
             <h1>
               Sprints:{" "}
               {partie.sprints?.map((q, k) => (
-                <div>
+                <div key={k}>
                   {q}
                   <form
                     action={`http://127.0.0.1:3001/deleteSprint/${k}/${partie._id}`}
@@ -119,7 +119,7 @@ const JoinedPage = () => {
             <h1>
               Users:{" "}
               {partie.users?.map((q, k) => (
-                <div>
+                <div key={k}>
                   {q}
                   <form
                     action={`http://127.0.0.1:3001/deleteSprint/${k}/${partie._id}`}
@@ -144,7 +144,7 @@ const JoinedPage = () => {
             <h1>
               Stories:{" "}
               {partie.stories?.map((q, k) => (
-                <div>
+                <div key={k}>
                   {q}
                   <form
                     action={`http://127.0.0.1:3001/deleteStories/${k}/${partie._id}`}
@@ -203,7 +203,9 @@ const JoinedPage = () => {
                 <select name="pets" id="pet-select">
                   <option value="">--Story--</option>
                   {partie.stories?.map((q, k) => (
-                    <option value={q}>{q}</option>
+                    <option key={k} value={q}>
+                      {q}
+                    </option>
                   ))}
                 </select>
                 <select name="pets" id="pet-select">
