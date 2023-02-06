@@ -219,11 +219,6 @@ const JoinedPage = () => {
           </Box>
         </Modal>
 
-        <a href="http://localhost:5173/">
-          <Button variant="outlined" color="error">
-            QUITTER
-          </Button>
-        </a>
         <form
           action={`http://127.0.0.1:3001/update/${partie._id}`}
           method="POST"
@@ -240,6 +235,11 @@ const JoinedPage = () => {
             Ajouter
           </Button>
         </form>
+        <a href="http://localhost:5173/">
+          <Button variant="outlined" color="error">
+            QUITTER
+          </Button>
+        </a>
       </Box>
     </div>
   );
