@@ -176,7 +176,50 @@ const JoinedPage = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}></Box>
+          <Box sx={style}>
+            <a href="http://localhost:5173/">
+              <button>Demarrer le Daily</button>
+            </a>
+            <button onClick={handleCloseDailyG}>retour</button>
+            {partie.users?.map((q, k) => (
+              <div key={k} className="flex">
+                {q}:
+                <select name="pets" id="pet-select">
+                  <option value="">--Story--</option>
+                  {partie.stories?.map((q, k) => (
+                    <option value={q}>{q}</option>
+                  ))}
+                </select>
+                <select name="pets" id="pet-select">
+                  <option value="">--state--</option>
+                  <option value="dog">OK</option>
+                  <option value="cat">Pb!</option>
+                  <option value="hamster">bof</option>
+                </select>
+              </div>
+            ))}
+
+            {/* <div className="flex">
+              <select name="users" id="users-select">
+                <option value="">--User--</option>
+                {partie.users?.map((q, k) => (
+                  <option value={q}>{q}</option>
+                ))}
+              </select>
+              <select name="pets" id="pet-select">
+                <option value="">--Story--</option>
+                {partie.stories?.map((q, k) => (
+                  <option value={q}>{q}</option>
+                ))}
+              </select>
+              <select name="pets" id="pet-select">
+                <option value="">--state--</option>
+                <option value="dog">OK</option>
+                <option value="cat">Pb!</option>
+                <option value="hamster">bof</option>
+              </select>
+            </div> */}
+          </Box>
         </Modal>
 
         <a href="http://localhost:5173/">
@@ -189,11 +232,17 @@ const JoinedPage = () => {
           action={`http://127.0.0.1:3001/update/${partie._id}`}
           method="POST"
         >
+          <h2>Changer nom de partie</h2>
           <input type="text" name="nom" placeholder={partie.nom} />
+          <h2>Ajouter User</h2>
           <input type="text" name="user" placeholder={partie.users} />
+          <h2>Ajouter Sprint</h2>
           <input type="text" name="sprint" placeholder={partie.sprints} />
+          <h2>Ajouter Story</h2>
           <input type="text" name="storie" placeholder={partie.stories} />
-          <button type="submit">Modifier/ajouter sprints et/ou stories</button>
+          <Button variant="outlined" color="error" type="submit">
+            Ajouter
+          </Button>
         </form>
       </Box>
     </div>
