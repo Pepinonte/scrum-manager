@@ -11,6 +11,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { Button, TextField, Avatar } from "@mui/material";
 import LogoScrummy from "../img/logoScrummy.png";
+import Box from '@mui/material/Box';
 
 const a = [];
 
@@ -57,11 +58,11 @@ const Home = () => {
 
   return (
     <div>
-      <div>
-        <Avatar class="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
-        <CreationPartieForm />
-        <ListeParties />
-      </div>
+        <div className="DivPrincipale">
+            <Avatar class="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
+            <CreationPartieForm />
+            <ListeParties />
+        </div>
     </div>
   );
 };
