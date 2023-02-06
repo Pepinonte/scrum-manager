@@ -9,8 +9,9 @@ router.get("/", (req, res) => {
 	res.send("Welcome to my API");
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add/:utilisateur", async (req, res) => {
 	const { nom, pseudo } = req.body;
+	const { utilisateur } = req.params;
 	const partie = Partie({
 		nom: nom,
 		users: [pseudo],
@@ -18,8 +19,12 @@ router.post("/add", async (req, res) => {
 	console.log(partie);
 	const partieSaved = await partie.save();
 	console.log(partieSaved);
+	console.log(req.params);
 
-	res.redirect(`http://localhost:5173/joinedPage/${partieSaved._id}`);
+	res.redirect(
+		`http://localhost:5173/joinedPage/${partieSaved._id}/${utilisateur}`
+	);
+	// res.redirect(`http://localhost:5173/joinedPage/${partieSaved._id}/moi`);
 });
 
 router.get("/parties", async (req, res) => {
