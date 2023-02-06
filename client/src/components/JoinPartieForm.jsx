@@ -6,11 +6,15 @@ import Box from "@mui/material/Box";
 
 const JoinPartieForm = () => {
   const [id, setId] = useState([]);
+  const [utilisateur, setUtilisateur] = useState();
   return (
     <div className="Form">
       <h1 className="m-6">Créer une partie</h1>
       {/* http://localhost:5173/joinedPage/${q._id} */}
-      <form action={`http://127.0.0.1:3001/join/${id}`} method="post">
+      <form
+        action={`http://127.0.0.1:3001/join/${id}/${utilisateur}`}
+        method="post"
+      >
         <TextField
           id="standard-basic"
           label="Code de partie"
@@ -25,6 +29,9 @@ const JoinPartieForm = () => {
           label="votre Pseudo"
           variant="standard"
           name="pseudo"
+          onChange={(event) => {
+            setUtilisateur(event.target.value);
+          }}
         />
         {/* <a href={`http://localhost:5173/joinedPage/${id}`}> */}
         <Button

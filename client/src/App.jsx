@@ -9,7 +9,10 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/joinedPage/:partieId" element={<JoinedPage />} />
+        <Route
+          path="/joinedPage/:partieId/:utilisateur"
+          element={<JoinedPage />}
+        />
       </Routes>
     </div>
   );

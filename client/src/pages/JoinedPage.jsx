@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import "../css/JoinedPage.css";
 
 const JoinedPage = () => {
-  const { partieId } = useParams();
+  const { partieId, utilisateur } = useParams();
   const initalUrlListUserParties = `http://127.0.0.1:3001/parties/${partieId}`;
   const [partie, setPartie] = useState([]);
 
@@ -72,6 +72,7 @@ const JoinedPage = () => {
 
   return (
     <div className="JoinedPage">
+      <h1>Bienvenue {utilisateur}</h1>
       <h1>Ta rejoin la partie: {partie.nom}</h1>
       <h1>Code partie : {partie._id}</h1>
       <Box sx={style1}>
@@ -182,7 +183,6 @@ const JoinedPage = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            {/* <a href="http://localhost:5173/"> */}
             <button
               className={flag ? "flex invisible" : ""}
               onClick={handkleFlag}
@@ -214,27 +214,6 @@ const JoinedPage = () => {
                 </select>
               </div>
             ))}
-
-            {/* <div className="flex">
-              <select name="users" id="users-select">
-                <option value="">--User--</option>
-                {partie.users?.map((q, k) => (
-                  <option value={q}>{q}</option>
-                ))}
-              </select>
-              <select name="pets" id="pet-select">
-                <option value="">--Story--</option>
-                {partie.stories?.map((q, k) => (
-                  <option value={q}>{q}</option>
-                ))}
-              </select>
-              <select name="pets" id="pet-select">
-                <option value="">--state--</option>
-                <option value="dog">OK</option>
-                <option value="cat">Pb!</option>
-                <option value="hamster">bof</option>
-              </select>
-            </div> */}
           </Box>
         </Modal>
 
@@ -242,7 +221,6 @@ const JoinedPage = () => {
           <Button variant="outlined" color="error">
             QUITTER
           </Button>
-          {/* <button>QUITTER</button> */}
         </a>
         <form
           action={`http://127.0.0.1:3001/update/${partie._id}`}

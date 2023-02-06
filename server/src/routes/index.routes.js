@@ -59,8 +59,8 @@ router.post("/update/:id", async (req, res) => {
 	res.redirect(`http://localhost:5173/joinedPage/${id}`);
 });
 
-router.post("/join/:id", async (req, res) => {
-	const { id } = req.params;
+router.post("/join/:id/:utilisateur", async (req, res) => {
+	const { id, utilisateur } = req.params;
 	const { nom, user, sprint, storie, pseudo } = req.body;
 	const parties = await Partie.findById(id);
 
@@ -85,7 +85,7 @@ router.post("/join/:id", async (req, res) => {
 	};
 	console.log(myUpdate);
 	await Partie.findByIdAndUpdate(id, myUpdate);
-	res.redirect(`http://localhost:5173/joinedPage/${id}`);
+	res.redirect(`http://localhost:5173/joinedPage/${id}/${utilisateur}}`);
 });
 
 router.get("/delete/:id", async (req, res) => {
