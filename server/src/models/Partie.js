@@ -5,15 +5,15 @@ const partieSchema = Schema(
 		nom: { type: String, required: true, trim: true, unique: true },
 		users: {
 			type: Array,
-			default: [""],
+			default: [],
 		},
 		sprints: {
 			type: Array,
-			default: [""],
+			default: [],
 		},
 		stories: {
 			type: Array,
-			default: [""],
+			default: [],
 		},
 	},
 	{
