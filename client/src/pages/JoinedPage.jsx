@@ -11,11 +11,13 @@ const JoinedPage = () => {
   const [partie, setPartie] = useState([]);
 
   /*----Modal-----*/
+  const [flag, setFlag] = useState(false);
   const [openSprint, setOpenSprint] = React.useState(false);
   const [openUsers, setOpenUsers] = React.useState(false);
   const [openStories, setOpenStories] = React.useState(false);
   const [openDailyP, setOpenDailyP] = React.useState(false);
   const [openDailyG, setOpenDailyG] = React.useState(false);
+  const handkleFlag = () => setFlag(!flag);
   const handleOpenSprint = () => setOpenSprint(true);
   const handleCloseSprint = () => setOpenSprint(false);
   const handleOpenUsers = () => setOpenUsers(true);
@@ -25,7 +27,10 @@ const JoinedPage = () => {
   const handleOpenDailyP = () => setOpenDailyP(true);
   const handleCloseDailyP = () => setOpenDailyP(false);
   const handleOpenDailyG = () => setOpenDailyG(true);
-  const handleCloseDailyG = () => setOpenDailyG(false);
+  const handleCloseDailyG = () => {
+    setOpenDailyG(false);
+    setFlag(false);
+  };
   /*--------------*/
 
   const style = {
@@ -177,12 +182,23 @@ const JoinedPage = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <a href="http://localhost:5173/">
-              <button>Demarrer le Daily</button>
-            </a>
+            {/* <a href="http://localhost:5173/"> */}
+            <button
+              className={flag ? "flex invisible" : ""}
+              onClick={handkleFlag}
+            >
+              Demarrer le Daily
+            </button>
+            {/* </a> */}
+            <button
+              className={!flag ? "flex invisible" : ""}
+              onClick={handleCloseDailyG}
+            >
+              Cloturer le Daily
+            </button>
             <button onClick={handleCloseDailyG}>retour</button>
             {partie.users?.map((q, k) => (
-              <div key={k} className="flex">
+              <div key={k} className={!flag ? "flex invisible" : "flex"}>
                 {q}:
                 <select name="pets" id="pet-select">
                   <option value="">--Story--</option>
