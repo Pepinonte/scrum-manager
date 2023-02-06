@@ -37,40 +37,42 @@ const ListeParties = (props) => {
   return (
     <div className="ListPartie">
       <TableContainer component={Paper} sx={{ maxWidth: 500 }}>
-      <Table sx={{ maxWidth: 500 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Nom de la partie</TableCell>
-            <TableCell align="right">Rejoindre</TableCell>
-            <TableCell align="right">Supprimer</TableCell>
-            
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {/* if have problem with map methode dont forget add ? befor .map */}
-          {parties?.map((q, key) => (
-            <TableRow
-            key={key}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {q.nom}
-              </TableCell>
-              <TableCell align="right"><a href={`http://localhost:5173/joinedPage/${q._id}`}>
-              <button>Rejoindre</button>
-            </a></TableCell>
-              <TableCell align="right"><a href={`http://127.0.0.1:3001/delete/${q._id}`}>
-              <button>Supprimer</button>
-            </a></TableCell>
-              
+        <Table sx={{ maxWidth: 500 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Nom de la partie</TableCell>
+              <TableCell align="right">Rejoindre</TableCell>
+              <TableCell align="right">Supprimer</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {/* if have problem with map methode dont forget add ? befor .map */}
+            {parties?.map((q, key) => (
+              <TableRow
+                key={key}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {q.nom}
+                </TableCell>
+                <TableCell align="right">
+                  <a href={`http://localhost:5173/joinedPage/${q._id}`}>
+                    <button>Rejoindre</button>
+                  </a>
+                </TableCell>
+                <TableCell align="right">
+                  <a href={`http://127.0.0.1:3001/delete/${q._id}`}>
+                    <button>Supprimer</button>
+                  </a>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       {/* <ul>
         {/* if have problem with map methode dont forget add ? befor .map */}
-        {/* {parties?.map((q, key) => (
+      {/* {parties?.map((q, key) => (
           <li key={key}>
             Partie: {q.nom}
             <a href={`http://localhost:5173/joinedPage/${q._id}`}>
