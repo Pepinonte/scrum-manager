@@ -25,22 +25,59 @@ const JoinedPage = () => {
       <h1>
         Sprints:{" "}
         {partie.sprints?.map((q, k) => (
-          <h1 key={k}>{q}</h1>
+          <div>
+            {q}
+            <form
+              action={`http://127.0.0.1:3001/deleteSprint/${k}/${partie._id}`}
+              method="POST"
+            >
+              <button type="submit">Supprimer</button>
+            </form>
+            <form
+              action={`http://127.0.0.1:3001/updateSprint/${k}/${partie._id}`}
+              method="POST"
+            >
+              <input type="text" name="sp" placeholder={q} />
+              <button type="submit">Modifier</button>
+            </form>
+          </div>
         ))}
       </h1>
       <h1>
         Users:{" "}
         {partie.users?.map((q, k) => (
-          <h1 key={k}>{q}</h1>
+          <div>
+            {q}
+            <form
+              action={`http://127.0.0.1:3001/deleteSprint/${k}/${partie._id}`}
+              method="POST"
+            >
+              <button type="submit">Supprimer</button>
+            </form>
+          </div>
         ))}
       </h1>
       <h1>
-        Sprints:{" "}
-        {partie.sprints?.map((q, k) => (
-          <h1 key={k}>{q}</h1>
+        Stories:{" "}
+        {partie.stories?.map((q, k) => (
+          <div>
+            {q}
+            <form
+              action={`http://127.0.0.1:3001/deleteStories/${k}/${partie._id}`}
+              method="POST"
+            >
+              <button type="submit">Supprimer</button>
+            </form>
+            <form
+              action={`http://127.0.0.1:3001/updateStories/${k}/${partie._id}`}
+              method="POST"
+            >
+              <input type="text" name="storie" placeholder={q} />
+              <button type="submit">Modifier</button>
+            </form>
+          </div>
         ))}
       </h1>
-      {/*<h1>Sprints: {partie.stories?}</h1> */}
       <a href="http://localhost:5173/">
         <button>QUITTER</button>
       </a>

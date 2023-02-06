@@ -38,8 +38,8 @@ Grille backend (sur 30 points) :
 - des routes permettent de créer/supprimer une partie : 2 ok
 - une route permet d'ajouter un user à une partie : 1
 - une route permet d'enlever un user d'une partie : 1
-- les routes CRUD sont correctement paramétrées pour les sprints : 5
-- les routes CRUD sont correctement paramétrées pour les stories : 5
+- les routes CRUD sont correctement paramétrées pour les sprints : 5 ok
+- les routes CRUD sont correctement paramétrées pour les stories : 5 ok
 - une route permet d'attacher une story à un sprint : 1
 - une route permet de détacher une story d'un sprint : 1
 - des routes permettent de générer une productivité (choix d'une story, réponse au QCM) : 2
