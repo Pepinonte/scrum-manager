@@ -11,13 +11,23 @@ const JoinedPage = () => {
   const [partie, setPartie] = useState([]);
 
   /*----Modal-----*/
-  const [flag, setFlag] = useState(false);
+  const [flag, setFlag] = useState(true);
+  const [flag2, setFlag2] = useState(false);
+  const [flag3, setFlag3] = useState(false);
   const [openSprint, setOpenSprint] = React.useState(false);
   const [openUsers, setOpenUsers] = React.useState(false);
   const [openStories, setOpenStories] = React.useState(false);
   const [openDailyP, setOpenDailyP] = React.useState(false);
   const [openDailyG, setOpenDailyG] = React.useState(false);
   const handkleFlag = () => setFlag(!flag);
+  const handkleFlag2 = () => {
+    setFlag(false);
+    setFlag2(!flag2);
+  };
+  const handkleFlag3 = () => {
+    handkleFlag2();
+    setFlag3(!flag3);
+  };
   const handleOpenSprint = () => setOpenSprint(true);
   const handleCloseSprint = () => setOpenSprint(false);
   const handleOpenUsers = () => setOpenUsers(true);
@@ -25,7 +35,12 @@ const JoinedPage = () => {
   const handleOpenStories = () => setOpenStories(true);
   const handleCloseStories = () => setOpenStories(false);
   const handleOpenDailyP = () => setOpenDailyP(true);
-  const handleCloseDailyP = () => setOpenDailyP(false);
+  const handleCloseDailyP = () => {
+    setOpenDailyP(false);
+    setFlag(true);
+    setFlag2(false);
+    setFlag3(false);
+  };
   const handleOpenDailyG = () => setOpenDailyG(true);
   const handleCloseDailyG = () => {
     setOpenDailyG(false);
@@ -90,7 +105,7 @@ const JoinedPage = () => {
                 <div key={k}>
                   {q}
                   <form
-                    action={`http://127.0.0.1:3001/deleteSprint/${k}/${partie._id}`}
+                    action={`http://127.0.0.1:3001/deleteSprint/${k}/${partie._id}/${utilisateur}`}
                     method="POST"
                   >
                     <button type="submit">Supprimer</button>
@@ -105,6 +120,15 @@ const JoinedPage = () => {
                 </div>
               ))}
             </h1>
+            <form
+              action={`http://127.0.0.1:3001/addSprint/${partie._id}/${utilisateur}`}
+              method="POST"
+            >
+              <input type="text" name="sprint" placeholder={partie.sprints} />
+              <Button variant="outlined" color="error" type="submit">
+                Ajouter Sprints
+              </Button>
+            </form>
           </Box>
         </Modal>
 
@@ -162,6 +186,15 @@ const JoinedPage = () => {
                 </div>
               ))}
             </h1>
+            <form
+              action={`http://127.0.0.1:3001/addStory/${partie._id}/${utilisateur}`}
+              method="POST"
+            >
+              <input type="text" name="storie" placeholder={partie.stories} />
+              <Button variant="outlined" color="error" type="submit">
+                Ajouter Sprints
+              </Button>
+            </form>
           </Box>
         </Modal>
 
@@ -172,7 +205,27 @@ const JoinedPage = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}></Box>
+          <Box sx={style}>
+            <div className={!flag ? "flex invisible" : ""}>
+              <select name="stories" id="stories-select">
+                <option value="">--Story--</option>
+                {partie.stories?.map((q, k) => (
+                  <option key={k} value={q}>
+                    {q}
+                  </option>
+                ))}
+              </select>
+              <button onClick={handkleFlag2}>Simuler sa productivite</button>
+            </div>
+            <div className={!flag2 ? "flex invisible" : ""}>
+              <div>Question:ma super question</div>
+              <button onClick={handkleFlag3}>Reponder</button>
+            </div>
+            <div className={!flag3 ? "flex invisible" : ""}>
+              <div>Reponse:correcte</div>
+            </div>
+            <button onClick={handleCloseDailyP}>retour</button>
+          </Box>
         </Modal>
 
         <Button onClick={handleOpenDailyG}>Gérer le Daily</Button>
@@ -219,8 +272,8 @@ const JoinedPage = () => {
           </Box>
         </Modal>
 
-        <form
-          action={`http://127.0.0.1:3001/update/${partie._id}`}
+        {/* <form
+          action={`http://127.0.0.1:3001/update/${partie._id}/${utilisateur}`}
           method="POST"
         >
           <h2>Changer nom de partie</h2>
@@ -234,7 +287,7 @@ const JoinedPage = () => {
           <Button variant="outlined" color="error" type="submit">
             Ajouter
           </Button>
-        </form>
+        </form> */}
         <a href="http://localhost:5173/">
           <Button variant="outlined" color="error">
             QUITTER

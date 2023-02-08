@@ -73,7 +73,7 @@ const Home = () => {
     <div>
       <div className="DivPrincipale">
         <Avatar class="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
-        <div className="ListPartie">
+        <div c lassName="ListPartie">
           <Button onClick={handleOpenC}>Créer partie</Button>
           <Modal
             open={openC}
