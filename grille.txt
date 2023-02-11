@@ -43,8 +43,8 @@ Grille backend (sur 30 points) :
 - une route permet d'attacher une story à un sprint : 1
 - une route permet de détacher une story d'un sprint : 1
 - des routes permettent de générer une productivité (choix d'une story, réponse au QCM) : 2
-- des routes permettent de démarrer/cloturer un daily (passer au jour suivant) : 2
-- les modèles de données BDD sont créés correctement : 2
+- des routes permettent de démarrer/cloturer un daily (passer au jour suivant) : 2 ok
+- les modèles de données BDD sont créés correctement : 2 ok
 - les routes sont correctement connectées à la BDD : 2 ok
 tests:
 - des tests unitaires permettent de tester le calcul d'une productivité : 1
