@@ -156,8 +156,8 @@ router.post("/deleteSprint/:rang/:id/:utilisateur", async (req, res) => {
 	res.redirect(`http://localhost:5173/joinedPage/${id}/${utilisateur}`);
 });
 
-router.post("/updateSprint/:rang/:id", async (req, res) => {
-	const { id, rang } = req.params;
+router.post("/updateSprint/:rang/:id/:utilisateur", async (req, res) => {
+	const { id, rang, utilisateur } = req.params;
 	const parties = await Partie.findById(id);
 	let myNewSprint = parties.sprints;
 	myNewSprint.splice(rang, 1, req.body.sp);
@@ -169,11 +169,11 @@ router.post("/updateSprint/:rang/:id", async (req, res) => {
 		stories: parties.stories,
 	};
 	await Partie.findByIdAndUpdate(id, myUpdate);
-	res.redirect("http://localhost:5173/");
+	res.redirect(`http://localhost:5173/joinedPage/${id}/${utilisateur}`);
 });
 
-router.post("/deleteStories/:rang/:id", async (req, res) => {
-	const { id, rang } = req.params;
+router.post("/deleteStories/:rang/:id/:utilisateur", async (req, res) => {
+	const { id, rang, utilisateur } = req.params;
 	const parties = await Partie.findById(id);
 
 	let myNewStorie = parties.stories;
@@ -186,11 +186,11 @@ router.post("/deleteStories/:rang/:id", async (req, res) => {
 		stories: myNewStorie,
 	};
 	await Partie.findByIdAndUpdate(id, myUpdate);
-	res.redirect("http://localhost:5173/");
+	res.redirect(`http://localhost:5173/joinedPage/${id}/${utilisateur}`);
 });
 
-router.post("/updateStories/:rang/:id", async (req, res) => {
-	const { id, rang } = req.params;
+router.post("/updateStories/:rang/:id/:utilisateur", async (req, res) => {
+	const { id, rang, utilisateur } = req.params;
 	const parties = await Partie.findById(id);
 
 	let myNewStorie = parties.stories;
@@ -203,7 +203,29 @@ router.post("/updateStories/:rang/:id", async (req, res) => {
 		stories: myNewStorie,
 	};
 	await Partie.findByIdAndUpdate(id, myUpdate);
-	res.redirect("http://localhost:5173/");
+	res.redirect(`http://localhost:5173/joinedPage/${id}/${utilisateur}`);
+});
+
+router.get("/openDaily/:id", async (req, res) => {
+	const { id } = req.params;
+
+	const myUpdate = {
+		dailyState: true,
+	};
+
+	await Partie.findByIdAndUpdate(id, myUpdate);
+});
+
+router.get("/closeDaily/:id", async (req, res) => {
+	const { id } = req.params;
+	const parties = await Partie.findById(id);
+
+	const myUpdate = {
+		dailyState: false,
+		daysNumber: parties.daysNumber + 1,
+	};
+
+	await Partie.findByIdAndUpdate(id, myUpdate);
 });
 
 export default router;

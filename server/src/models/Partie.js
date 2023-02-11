@@ -15,6 +15,14 @@ const partieSchema = Schema(
 			type: Array,
 			default: [""],
 		},
+		dailyState: {
+			type: Boolean,
+			default: false,
+		},
+		daysNumber: {
+			type: Number,
+			default: 0,
+		},
 	},
 	{
 		// timestamps: true,

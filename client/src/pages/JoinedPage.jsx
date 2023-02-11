@@ -34,18 +34,31 @@ const JoinedPage = () => {
   const handleCloseUsers = () => setOpenUsers(false);
   const handleOpenStories = () => setOpenStories(true);
   const handleCloseStories = () => setOpenStories(false);
-  const handleOpenDailyP = () => setOpenDailyP(true);
+  const handleOpenDailyP = () => {
+    setOpenDailyP(true);
+  };
   const handleCloseDailyP = () => {
     setOpenDailyP(false);
+    setFlag(false);
+    setFlag2(false);
+    setFlag3(false);
+  };
+  const handleOpenDailyG = () => {
+    setOpenDailyG(true);
+    setFlag(false);
+  };
+  const handleCloseDailyG = () => {
+    fetchItemsListUserParties(`http://127.0.0.1:3001/closeDaily/${partie._id}`);
+    setOpenDailyG(false);
     setFlag(true);
     setFlag2(false);
     setFlag3(false);
   };
-  const handleOpenDailyG = () => setOpenDailyG(true);
-  const handleCloseDailyG = () => {
-    setOpenDailyG(false);
-    setFlag(false);
+  const handleStartDaily = () => {
+    handkleFlag();
+    fetchItemsListUserParties(`http://127.0.0.1:3001/openDaily/${partie._id}`);
   };
+
   /*--------------*/
 
   const style = {
@@ -90,6 +103,7 @@ const JoinedPage = () => {
       <h1>Bienvenue {utilisateur}</h1>
       <h1>Ta rejoin la partie: {partie.nom}</h1>
       <h1>Code partie : {partie._id}</h1>
+      <h1>Nombre de jours : {partie.daysNumber}</h1>
       <Box sx={style1}>
         <Button onClick={handleOpenSprint}>Gérer les Sprints</Button>
         <Modal
@@ -111,7 +125,7 @@ const JoinedPage = () => {
                     <button type="submit">Supprimer</button>
                   </form>
                   <form
-                    action={`http://127.0.0.1:3001/updateSprint/${k}/${partie._id}`}
+                    action={`http://127.0.0.1:3001/updateSprint/${k}/${partie._id}/${utilisateur}`}
                     method="POST"
                   >
                     <input type="text" name="sp" placeholder={q} />
@@ -171,13 +185,13 @@ const JoinedPage = () => {
                 <div key={k}>
                   {q}
                   <form
-                    action={`http://127.0.0.1:3001/deleteStories/${k}/${partie._id}`}
+                    action={`http://127.0.0.1:3001/deleteStories/${k}/${partie._id}/${utilisateur}`}
                     method="POST"
                   >
                     <button type="submit">Supprimer</button>
                   </form>
                   <form
-                    action={`http://127.0.0.1:3001/updateStories/${k}/${partie._id}`}
+                    action={`http://127.0.0.1:3001/updateStories/${k}/${partie._id}/${utilisateur}`}
                     method="POST"
                   >
                     <input type="text" name="storie" placeholder={q} />
@@ -238,7 +252,7 @@ const JoinedPage = () => {
           <Box sx={style}>
             <button
               className={flag ? "flex invisible" : ""}
-              onClick={handkleFlag}
+              onClick={handleStartDaily}
             >
               Demarrer le Daily
             </button>
@@ -272,22 +286,6 @@ const JoinedPage = () => {
           </Box>
         </Modal>
 
-        {/* <form
-          action={`http://127.0.0.1:3001/update/${partie._id}/${utilisateur}`}
-          method="POST"
-        >
-          <h2>Changer nom de partie</h2>
-          <input type="text" name="nom" placeholder={partie.nom} />
-          <h2>Ajouter User</h2>
-          <input type="text" name="user" placeholder={partie.users} />
-          <h2>Ajouter Sprint</h2>
-          <input type="text" name="sprint" placeholder={partie.sprints} />
-          <h2>Ajouter Story</h2>
-          <input type="text" name="storie" placeholder={partie.stories} />
-          <Button variant="outlined" color="error" type="submit">
-            Ajouter
-          </Button>
-        </form> */}
         <a href="http://localhost:5173/">
           <Button variant="outlined" color="error">
             QUITTER
