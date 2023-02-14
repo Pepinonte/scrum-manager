@@ -40,34 +40,34 @@ const Home = () => {
   const handleOpenJ = () => setOpenJ(true);
   const handleCloseJ = () => setOpenJ(false);
 
-  const idFinderMatcherFromNameUser = (myUser) => {
-    let users = [];
-    const idPartie = [];
-    parties.map((partie, index) => {
-      users += usersParser(partie.users);
-      if (users !== "") {
-        usersParser(partie.users).map((d) => {
-          if (d === myUser) {
-            idPartie.push(partie.id);
-          }
-        });
-      }
-    });
+  // const idFinderMatcherFromNameUser = (myUser) => {
+  //   let users = [];
+  //   const idPartie = [];
+  //   parties.map((partie, index) => {
+  //     users += usersParser(partie.users);
+  //     if (users !== "") {
+  //       usersParser(partie.users).map((d) => {
+  //         if (d === myUser) {
+  //           idPartie.push(partie.id);
+  //         }
+  //       });
+  //     }
+  //   });
 
-    return idPartie;
-  };
+  //   return idPartie;
+  // };
 
-  const fetchItemsListUserParties = (url) => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setParties(data);
-      });
-  };
+  // const fetchItemsListUserParties = (url) => {
+  //   fetch(url)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setParties(data);
+  //     });
+  // };
 
-  useEffect(() => {
-    // fetchItemsListUserParties(initalUrlListUserParties);
-  }, []);
+  // useEffect(() => {
+  //   // fetchItemsListUserParties(initalUrlListUserParties);
+  // }, []);
 
   return (
     <div>

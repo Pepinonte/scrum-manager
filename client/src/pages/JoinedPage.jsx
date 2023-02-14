@@ -204,9 +204,10 @@ const JoinedPage = () => {
               action={`http://127.0.0.1:3001/addStory/${partie._id}/${utilisateur}`}
               method="POST"
             >
-              <input type="text" name="storie" placeholder={partie.stories} />
+              {/* <input type="text" name="storie" placeholder={partie.stories} /> */}
+              <input type="text" name="storie" placeholder={"Ajouter Story"} />
               <Button variant="outlined" color="error" type="submit">
-                Ajouter Sprints
+                Ajouter Story
               </Button>
             </form>
           </Box>
