@@ -2,6 +2,8 @@ Bien penser à drop la base de données démarrage des tests pour éviter tous p
 
 Des éléments vides dans la liste des stories et dans la liste des sprints sont présent à la création d'une partie.
 
+**Pensez à vous mettre dans la branche Develop !**
+
 **Auto Evaluation :**
 
 Grille frontend: (sur 40 points)
