@@ -1,0 +1,12 @@
+.JoinedPage{
+    display: block;
+    justify-content: center;
+    text-align: center;
+    
+    
+}
+
+.JoinedPage Button{
+    width: 200px;
+}
+
