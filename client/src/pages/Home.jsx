@@ -72,7 +72,7 @@ const Home = () => {
   return (
     <div>
       <div className="DivPrincipale">
-        <Avatar className="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
+        <Avatar class="Logo" src={LogoScrummy} alt="Logo Scrummmy" />
         <div className="ListPartie">
           <Button onClick={handleOpenC}>creer partie</Button>
           <Modal
