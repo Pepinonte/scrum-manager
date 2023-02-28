@@ -1,12 +1,29 @@
-.JoinedPage{
-    display: block;
-    justify-content: center;
-    text-align: center;
-    
-    
+.JoinedPage {
+  display: block;
+  justify-content: center;
+  text-align: center;
 }
 
-.JoinedPage Button{
-    width: 200px;
+.JoinedPage Button {
+  width: 200px;
 }
 
+#BtnAjoutSprint {
+  margin-top: 20px;
+}
+
+.TitreAjoutSprint {
+  padding-top: 20px;
+}
+
+.TitreSprint {
+  padding-bottom: 20px;
+}
+
+.SprintItem {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#standard-basic {
+  padding-right: 50px;
+}
